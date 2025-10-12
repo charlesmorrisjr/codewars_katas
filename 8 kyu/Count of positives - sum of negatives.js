@@ -24,20 +24,35 @@ Examples:
 For input [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15], you should return [10, -65].
 
 Algorithm:
-- Return a new array with the inverse of each element in the input array
-- The first element is the count of positive numbers
-- The second element is the sum of negative numbers
+- If input array is empty or null, return an empty array
+- Create a variable named sumNeg and initialize it to zero
+- Create a variable named sumPos and initialize it to zero
+- Iterate through each element of the input array
+  - If the element at the current index is less than zero
+    - Add the element at the current index to sumNeg
+  - If the element at the current index is greater than zero
+    - Add one to sumPos
+- Return an array of which the first element is sumPos and the second element is sumNeg
 
 */
 
 function countPositivesSumNegatives(input) {
-   if (!input || input.length === 0) {
-       return [];
-   }
+  if (!input || input.length === 0) {
+      return [];
+  }
 
-   const countPositives = input.filter(num => num > 0).length;
-   const sumNegatives = input.filter(num => num < 0).reduce((acc, num) => acc + num, 0);
+  let sumPos = 0;
+  let sumNeg = 0;
 
-   return [countPositives, sumNegatives];
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] < 0) {
+      sumNeg += input[i];
+    } else if (input[i] > 0) {
+      sumPos += 1;
+    }
+  }
+  
+  return [sumPos, sumNeg];
 }
+
 
